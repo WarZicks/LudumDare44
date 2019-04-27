@@ -65,6 +65,7 @@ public class EditorSpawn : MonoBehaviour
     void Start()
     {
         Player = GameObject.FindGameObjectWithTag("Player");
+        HourglassScripts = GameObject.FindGameObjectWithTag("Hourglass").GetComponent<Hourglass>();
     }
 
     // Update is called once per frame
