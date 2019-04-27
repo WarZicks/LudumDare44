@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4728818635528855832}
   - component: {fileID: 1698018606087857997}
   m_Layer: 0
-  m_Name: Rond
+  m_Name: Petit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,8 +28,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4728818635528855839}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.266, y: 0.859, z: 0}
-  m_LocalScale: {x: 150, y: 20, z: 10}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 72, y: 10, z: 10}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -94,7 +94,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa4dd3498a9fc3c42a716be8dcf45f45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  colorToTurn: {r: 0.74509805, g: 0.11764707, b: 0.098039225, a: 1}
+  colorActif: {r: 0.21176472, g: 0.21176472, b: 0.21176472, a: 1}
+  colorMainn: {r: 0.32156864, g: 0.32156864, b: 0.32156864, a: 1}
   Actif: 0
+  life: 0
 --- !u!50 &4728818635528855832
 Rigidbody2D:
   serializedVersion: 4
@@ -103,7 +107,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4728818635528855839}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0

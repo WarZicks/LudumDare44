@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityStandardAssets._2D;
 
 public class EditorSpawn : MonoBehaviour
 {
+    GameObject Player;
+
     public GameObject[] Piece;
 
     [SerializeField]
@@ -15,6 +18,8 @@ public class EditorSpawn : MonoBehaviour
 
     [SerializeField]
     int Index;
+
+    float lifemoins;
 
     [SerializeField]
     GameObject Clone;
@@ -33,6 +38,8 @@ public class EditorSpawn : MonoBehaviour
             return (celui + roundnb - resto);
         }
     }
+
+    public Material mat;
 
     public bool IsPointerOverUIObject()
     {
@@ -57,6 +64,7 @@ public class EditorSpawn : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Player = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame
@@ -72,11 +80,13 @@ public class EditorSpawn : MonoBehaviour
                     if(result.gameObject.GetComponent<IndexSpawn>())
                     {
                         Index = result.gameObject.GetComponent<IndexSpawn>().Index;
+                        lifemoins = result.gameObject.GetComponent<IndexSpawn>().cout;
                     }
                 }
 
                 Clone = Instantiate(Piece[Index]);
                 Clone.GetComponent<PieceCollider>().Actif = true;
+                Clone.GetComponent<PieceCollider>().life = lifemoins;
             }
         }
 
@@ -89,6 +99,7 @@ public class EditorSpawn : MonoBehaviour
                 Clone.transform.position = new Vector3(RoundMultiple(Clone.transform.position.x), RoundMultiple(Clone.transform.position.y), 0);
                 Clone.GetComponent<PieceCollider>().Actif = false;
                 Clone = null;
+                Player.GetComponent<PlatformerCharacter2D>().Life -= lifemoins;
             }
         }
 

@@ -5,4 +5,6 @@ using UnityEngine;
 public class IndexSpawn : MonoBehaviour
 {
     public int Index;
+
+    public float cout;
 }
