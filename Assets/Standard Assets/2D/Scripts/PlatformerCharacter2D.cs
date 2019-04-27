@@ -14,6 +14,9 @@ namespace UnityStandardAssets._2D
         private Transform m_GroundCheck;    // A position marking where to check if the player is grounded.
         const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
         private bool m_Grounded;            // Whether or not the player is grounded.
+        private int m_nbJumps;
+        public bool m_WallCheck;           // Whether or not the player is walled.
+        public float wallJump;
         private Transform m_CeilingCheck;   // A position marking where to check for ceilings
         const float k_CeilingRadius = .01f; // Radius of the overlap circle to determine if the player can stand up
         private Animator m_Anim;            // Reference to the player's animator component.
@@ -33,6 +36,7 @@ namespace UnityStandardAssets._2D
         private void FixedUpdate()
         {
             m_Grounded = false;
+            m_WallCheck = false;
 
             // The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
             // This can be done using layers instead but Sample Assets will not overwrite your project settings.
@@ -43,6 +47,13 @@ namespace UnityStandardAssets._2D
                     m_Grounded = true;
             }
             m_Anim.SetBool("Ground", m_Grounded);
+
+            Collider2D[] collidersW = Physics2D.OverlapCircleAll(transform.position, 1.0f, m_WhatIsGround);
+            for (int i = 0; i < collidersW.Length; i++)
+            {
+                if (collidersW[i].gameObject != gameObject && !m_Grounded)
+                    m_WallCheck = true;
+            }
 
             // Set the vertical animation
             m_Anim.SetFloat("vSpeed", m_Rigidbody2D.velocity.y);
@@ -74,7 +85,8 @@ namespace UnityStandardAssets._2D
                 m_Anim.SetFloat("Speed", Mathf.Abs(move));
 
                 // Move the character
-                m_Rigidbody2D.velocity = new Vector2(move*m_MaxSpeed, m_Rigidbody2D.velocity.y);
+                wallJump = Mathf.Lerp(wallJump, 0, .1f);
+                m_Rigidbody2D.velocity = new Vector2((move+wallJump)*m_MaxSpeed, m_Rigidbody2D.velocity.y);
 
                 // If the input is moving the player right and the player is facing left...
                 if (move > 0 && !m_FacingRight)
@@ -90,12 +102,31 @@ namespace UnityStandardAssets._2D
                 }
             }
             // If the player should jump...
-            if (m_Grounded && jump && m_Anim.GetBool("Ground"))
+            if (m_nbJumps < 1 && jump && !m_WallCheck)
             {
                 // Add a vertical force to the player.
                 m_Grounded = false;
+                m_nbJumps++;
                 m_Anim.SetBool("Ground", false);
+                m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, 0);
                 m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
+            }
+            if (jump && m_WallCheck)
+            {
+                // Add a vertical force to the player.
+                m_Anim.SetBool("Ground", false);
+                m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, 0);
+                //m_Rigidbody2D.AddForce(new Vector2(m_JumpForce * 10 * -transform.localScale.x, m_JumpForce));
+                m_Rigidbody2D.AddForce(new Vector2(0, m_JumpForce));
+                wallJump = -transform.localScale.x * 2;
+            }
+            if (m_Grounded)
+            {
+                m_nbJumps = 0;
+            }
+            if (m_WallCheck)
+            {
+                m_Rigidbody2D.AddForce(new Vector2(0, m_JumpForce/80));
             }
         }
 
