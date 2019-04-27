@@ -2,8 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
+    #region Singleton
+
+    public static GameManager instance { get; private set; }
+
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    #endregion
+
+    public List<GameObject> Change;
+
     // Start is called before the first frame update
     void Start()
     {
