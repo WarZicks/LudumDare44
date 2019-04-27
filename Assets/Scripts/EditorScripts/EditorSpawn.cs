@@ -14,7 +14,7 @@ public class EditorSpawn : MonoBehaviour
     [SerializeField]
     Camera camera;
 
-    public bool OnUI;
+    bool OnUI;
 
     [SerializeField]
     int Index;
@@ -25,6 +25,8 @@ public class EditorSpawn : MonoBehaviour
     GameObject Clone;
 
     public float roundnb;
+
+    public Hourglass HourglassScripts;
 
     public float RoundMultiple(float celui)
     {
@@ -38,8 +40,6 @@ public class EditorSpawn : MonoBehaviour
             return (celui + roundnb - resto);
         }
     }
-
-    public Material mat;
 
     public bool IsPointerOverUIObject()
     {
@@ -84,9 +84,9 @@ public class EditorSpawn : MonoBehaviour
                     }
                 }
 
-                Clone = Instantiate(Piece[Index]);
-                Clone.GetComponent<PieceCollider>().Actif = true;
-                Clone.GetComponent<PieceCollider>().life = lifemoins;
+                    Clone = Instantiate(Piece[Index]);
+                    Clone.GetComponent<PieceCollider>().Actif = true;
+                    Clone.GetComponent<PieceCollider>().life = lifemoins;
             }
         }
 
@@ -100,6 +100,7 @@ public class EditorSpawn : MonoBehaviour
                 Clone.GetComponent<PieceCollider>().Actif = false;
                 Clone = null;
                 Player.GetComponent<PlatformerCharacter2D>().Life -= lifemoins;
+                HourglassScripts.Lerp = true;
             }
         }
 

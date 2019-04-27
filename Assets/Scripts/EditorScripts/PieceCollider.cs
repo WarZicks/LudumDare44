@@ -5,6 +5,8 @@ using UnityStandardAssets._2D;
 
 public class PieceCollider : MonoBehaviour
 {
+    public Hourglass HourglassScripts;
+
     GameObject Player;
 
     Renderer rend;
@@ -18,6 +20,7 @@ public class PieceCollider : MonoBehaviour
     [SerializeField]
     Color colorMainn;
 
+    [HideInInspector]
     public bool Actif;
 
     bool collidertrigger = true;
@@ -32,6 +35,7 @@ public class PieceCollider : MonoBehaviour
     {
         rend = GetComponent<Renderer>();
         Player = GameObject.FindGameObjectWithTag("Player");
+        HourglassScripts = GameObject.FindGameObjectWithTag("Hourglass").GetComponent<Hourglass>();
     }
 
     public void Update()
@@ -60,6 +64,7 @@ public class PieceCollider : MonoBehaviour
             if (!DoOnce)
             {
                 Player.GetComponent<PlatformerCharacter2D>().Life += life;
+                HourglassScripts.Lerp = false;
                 DoOnce = true;
             }
             Destroy(gameObject);
