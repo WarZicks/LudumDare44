@@ -562,7 +562,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -624, y: 114}
+  m_AnchoredPosition: {x: -624, y: 72}
   m_SizeDelta: {x: 262, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &54870242
@@ -2204,6 +2204,7 @@ MonoBehaviour:
   timeToReachTarget: 20
   Scroll: 0
   Next: {fileID: 0}
+  Wait: 0
 --- !u!222 &275176460
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3621,6 +3622,7 @@ GameObject:
   - component: {fileID: 564382832}
   - component: {fileID: 564382831}
   - component: {fileID: 564382830}
+  - component: {fileID: 564382835}
   m_Layer: 5
   m_Name: TextMeshPro Text (1)
   m_TagString: Untagged
@@ -3793,9 +3795,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: 140
-  timeToReachTarget: 5
+  timeToReachTarget: 10
   Scroll: 0
   Next: {fileID: 2084378904}
+  Wait: 0
 --- !u!222 &564382833
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3804,6 +3807,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 564382828}
   m_CullTransparentMesh: 0
+--- !u!225 &564382835
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 564382828}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &572776379
 GameObject:
   m_ObjectHideFlags: 0
@@ -4519,6 +4534,7 @@ MonoBehaviour:
   timeToReachTarget: 20
   Scroll: 0
   Next: {fileID: 0}
+  Wait: 0
 --- !u!222 &646413270
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5283,6 +5299,7 @@ MonoBehaviour:
   timeToReachTarget: 20
   Scroll: 0
   Next: {fileID: 0}
+  Wait: 0
 --- !u!222 &757420355
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6406,6 +6423,7 @@ MonoBehaviour:
   timeToReachTarget: 20
   Scroll: 0
   Next: {fileID: 0}
+  Wait: 0
 --- !u!222 &817235684
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6785,6 +6803,7 @@ MonoBehaviour:
   timeToReachTarget: 20
   Scroll: 0
   Next: {fileID: 0}
+  Wait: 0
 --- !u!222 &856156146
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8521,6 +8540,7 @@ MonoBehaviour:
   timeToReachTarget: 20
   Scroll: 0
   Next: {fileID: 0}
+  Wait: 0
 --- !u!222 &1088823969
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9561,6 +9581,7 @@ GameObject:
   - component: {fileID: 1194886583}
   - component: {fileID: 1194886582}
   - component: {fileID: 1194886581}
+  - component: {fileID: 1194886585}
   m_Layer: 5
   m_Name: TextMeshPro Text
   m_TagString: Untagged
@@ -9743,6 +9764,7 @@ MonoBehaviour:
   timeToReachTarget: 20
   Scroll: 0
   Next: {fileID: 0}
+  Wait: 0
 --- !u!222 &1194886584
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9751,6 +9773,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1194886579}
   m_CullTransparentMesh: 0
+--- !u!225 &1194886585
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1194886579}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1001 &1233303216
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12609,6 +12643,7 @@ MonoBehaviour:
   timeToReachTarget: 20
   Scroll: 0
   Next: {fileID: 0}
+  Wait: 0
 --- !u!222 &1621582128
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -13833,7 +13868,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1786377576}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 058cba836c1846c3aa1c5fd2e28aea77, type: 3}
   m_Name: 
@@ -15902,13 +15937,14 @@ GameObject:
   - component: {fileID: 2084378908}
   - component: {fileID: 2084378907}
   - component: {fileID: 2084378906}
+  - component: {fileID: 2084378910}
   m_Layer: 5
   m_Name: TextMeshPro Text (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2084378905
 RectTransform:
   m_ObjectHideFlags: 0
@@ -16028,7 +16064,7 @@ MonoBehaviour:
     lineCount: 4
     pageCount: 1
     materialCount: 2
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -16077,6 +16113,7 @@ MonoBehaviour:
   timeToReachTarget: 20
   Scroll: 0
   Next: {fileID: 0}
+  Wait: 0
 --- !u!222 &2084378909
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -16085,6 +16122,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2084378904}
   m_CullTransparentMesh: 0
+--- !u!225 &2084378910
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2084378904}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &2085056054
 GameObject:
   m_ObjectHideFlags: 0
@@ -16572,6 +16621,7 @@ MonoBehaviour:
   timeToReachTarget: 20
   Scroll: 0
   Next: {fileID: 0}
+  Wait: 0
 --- !u!222 &2107809461
 CanvasRenderer:
   m_ObjectHideFlags: 0
