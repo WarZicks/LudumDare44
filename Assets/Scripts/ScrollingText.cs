@@ -14,6 +14,9 @@ public class ScrollingText : MonoBehaviour
     public GameObject Next;
     public bool Wait;
 
+    [SerializeField]
+    bool Go;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,12 +35,13 @@ public class ScrollingText : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (ready)
+        if (ready && Go)
         {
             t += Time.deltaTime / timeToReachTarget;
             if (Scroll)
             {
                 GetComponent<RectTransform>().position = new Vector3(GetComponent<RectTransform>().position.x, Mathf.Lerp(StartPos, target, t), GetComponent<RectTransform>().position.z);
+                StartCoroutine(FadeTo(1.0f, GetComponent<CanvasGroup>(), true));
             }
             else
             {
@@ -52,6 +56,7 @@ public class ScrollingText : MonoBehaviour
     void ChangeReady()
     {
         ready = true;
+        Go = true;
     }
 
     IEnumerator FadeTo(float aTime, CanvasGroup a, bool In)
@@ -64,6 +69,9 @@ public class ScrollingText : MonoBehaviour
                 a.alpha = t;
                 yield return null;
             }
+
+            t = 0;
+            Go = false;
             if (Next != null)
             {
                 StartCoroutine(FadeTo(1.0f, Next.GetComponent<CanvasGroup>(), false));
@@ -78,6 +86,7 @@ public class ScrollingText : MonoBehaviour
                 yield return null;
             }
             Next.GetComponent<CanvasGroup>().alpha = 1;
+            Next.GetComponent<ScrollingText>().Go = true;
         }
     }
 }
