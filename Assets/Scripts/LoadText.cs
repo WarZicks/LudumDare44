@@ -15,7 +15,7 @@ public class LoadText : MonoBehaviour
     {
         narration = GetComponent<TextMeshProUGUI>();
         Load(file);
-        Debug.Log(GetAt(Index).Phrase);
+        //Debug.Log(GetAt(Index).Phrase);
         narration.text = GetAt(Index).Phrase;
     }
 
