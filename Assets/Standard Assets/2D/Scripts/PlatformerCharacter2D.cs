@@ -1,11 +1,13 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace UnityStandardAssets._2D
 {
     public class PlatformerCharacter2D : MonoBehaviour
     {
-        public float Life = 100;
+        public float Life = 100, MaxLife = 100;
         [SerializeField] private float m_MaxSpeed = 10f;                    // The fastest the player can travel in the x axis.
         [SerializeField] private float m_JumpForce = 400f;                  // Amount of force added when the player jumps.
         [Range(0, 1)] [SerializeField] private float m_CrouchSpeed = .36f;  // Amount of maxSpeed applied to crouching movement. 1 = 100%
@@ -24,6 +26,8 @@ namespace UnityStandardAssets._2D
         private Rigidbody2D m_Rigidbody2D;
         private bool m_FacingRight = true;  // For determining which way the player is currently facing.
 
+        private Transform StartPosition;
+
         private void Awake()
         {
             // Setting up references.
@@ -31,6 +35,12 @@ namespace UnityStandardAssets._2D
             m_CeilingCheck = transform.Find("CeilingCheck");
             m_Anim = GetComponent<Animator>();
             m_Rigidbody2D = GetComponent<Rigidbody2D>();
+        }
+
+        private void Start()
+        {
+            Life = MaxLife;
+            StartPosition = GameObject.FindGameObjectWithTag("StartPosition").transform;
         }
 
 
@@ -119,7 +129,7 @@ namespace UnityStandardAssets._2D
                 m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, 0);
                 //m_Rigidbody2D.AddForce(new Vector2(m_JumpForce * 10 * -transform.localScale.x, m_JumpForce));
                 m_Rigidbody2D.AddForce(new Vector2(0, m_JumpForce));
-                wallJump = -transform.localScale.x * 2;
+                wallJump = -transform.localScale.x * 0.4f;
             }
             if (m_Grounded)
             {
@@ -141,6 +151,19 @@ namespace UnityStandardAssets._2D
             Vector3 theScale = transform.localScale;
             theScale.x *= -1;
             transform.localScale = theScale;
+        }
+
+        public void CheckPlayerLife()
+        {
+            if(Life <= 0)
+            {
+                Life = MaxLife;
+                transform.position = StartPosition.position;
+            }
+            if(Life >= MaxLife)
+            {
+                Life = MaxLife;
+            }
         }
     }
 }
