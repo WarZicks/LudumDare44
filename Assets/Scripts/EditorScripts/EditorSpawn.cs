@@ -82,12 +82,13 @@ public class EditorSpawn : MonoBehaviour
                     {
                         Index = result.gameObject.GetComponent<IndexSpawn>().Index;
                         lifemoins = result.gameObject.GetComponent<IndexSpawn>().cout;
+                        Clone = Instantiate(Piece[Index]);
+                        Clone.GetComponent<PieceCollider>().Actif = true;
+                        Clone.GetComponent<PieceCollider>().life = lifemoins;
                     }
                 }
 
-                    Clone = Instantiate(Piece[Index]);
-                    Clone.GetComponent<PieceCollider>().Actif = true;
-                    Clone.GetComponent<PieceCollider>().life = lifemoins;
+
             }
         }
 
