@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Hourglass
   - LevelController
+  - StartPosition
   layers:
   - Default
   - TransparentFX
