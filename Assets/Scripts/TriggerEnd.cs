@@ -12,8 +12,8 @@ public class TriggerEnd : MonoBehaviour
 
     public GameObject[] Capacite;
 
-    enum spelll { None, Jump, DoubleJump, Wall }; //Will be used to keep track of what's selected
-    spelll currentSel; // Create a Selection object that will be used throughout script
+    public enum spelll { None, Jump, DoubleJump, Wall }; //Will be used to keep track of what's selected
+    public spelll currentSel; // Create a Selection object that will be used throughout script
 
     private void Start()
     {
