@@ -18,6 +18,7 @@ public class TriggerEnd : MonoBehaviour
     private void Start()
     {
         Player = GameObject.FindGameObjectWithTag("Player");
+        
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -25,6 +26,8 @@ public class TriggerEnd : MonoBehaviour
         if (other.tag == "Player")
         {
             CanvasZone[0].SetActive(false);
+            Player.GetComponent<PlatformerCharacter2D>().Life = Player.GetComponent<PlatformerCharacter2D>().MaxLife;
+            GameObject.FindGameObjectWithTag("Hourglass").GetComponent<Hourglass>().Lerp = true;
 
             if (CanvasZone[1] != null)
             {
@@ -49,6 +52,15 @@ public class TriggerEnd : MonoBehaviour
             if (currentSel == spelll.Wall)
             {
                 Player.GetComponent<PlatformerCharacter2D>().WallJumpb = true;
+            }
+
+            if(LevelManager.instance.CurrentLevel == 4)
+            {
+                MusicManager.instance.ChangeMusicLevel5();
+            }
+            else if(LevelManager.instance.CurrentLevel == 5)
+            {
+                MusicManager.instance.ChangeToMainTheme();
             }
         }
     }
