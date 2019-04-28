@@ -8,6 +8,7 @@ namespace UnityStandardAssets._2D
     public class PlatformerCharacter2D : MonoBehaviour
     {
         public float Life = 100, MaxLife = 100;
+        public bool Jump, DoubleJump, WallJumpb;
         [SerializeField] private float m_MaxSpeed = 10f;                    // The fastest the player can travel in the x axis.
         [SerializeField] private float m_JumpForce = 400f;                  // Amount of force added when the player jumps.
         [Range(0, 1)] [SerializeField] private float m_CrouchSpeed = .36f;  // Amount of maxSpeed applied to crouching movement. 1 = 100%
@@ -62,7 +63,7 @@ namespace UnityStandardAssets._2D
             Collider2D[] collidersW = Physics2D.OverlapCircleAll(transform.position, 1.0f, m_WhatIsGround);
             for (int i = 0; i < collidersW.Length; i++)
             {
-                if (collidersW[i].gameObject != gameObject && !m_Grounded)
+                if (collidersW[i].gameObject != gameObject && !m_Grounded && WallJumpb)
                     m_WallCheck = true;
             }
 
@@ -95,6 +96,7 @@ namespace UnityStandardAssets._2D
                 // The Speed animator parameter is set to the absolute value of the horizontal input.
                 m_Anim.SetFloat("Speed", Mathf.Abs(move));
 
+
                 // Move the character
                 wallJump = Mathf.Lerp(wallJump, 0, .1f);
                 m_Rigidbody2D.velocity = new Vector2((move+wallJump)*m_MaxSpeed, m_Rigidbody2D.velocity.y);
@@ -113,7 +115,7 @@ namespace UnityStandardAssets._2D
                 }
             }
             // If the player should jump...
-            if (m_nbJumps < 1 && jump && !m_WallCheck)
+            if (m_nbJumps < 1 && jump && !m_WallCheck && DoubleJump)
             {
                 // Add a vertical force to the player.
                 m_Grounded = false;
@@ -122,7 +124,18 @@ namespace UnityStandardAssets._2D
                 m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, 0);
                 m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
             }
-            if (jump && m_WallCheck)
+
+            if (m_Grounded && jump && m_Anim.GetBool("Ground") && Jump)
+            {
+                // Add a vertical force to the player.
+                m_Grounded = false;
+                m_nbJumps++;
+                m_Anim.SetBool("Ground", false);
+                m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, 0);
+                m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
+            }
+
+            if (jump && m_WallCheck && WallJumpb)
             {
                 // Add a vertical force to the player.
                 m_Anim.SetBool("Ground", false);
@@ -131,11 +144,12 @@ namespace UnityStandardAssets._2D
                 m_Rigidbody2D.AddForce(new Vector2(0, m_JumpForce));
                 wallJump = -transform.localScale.x * 0.4f;
             }
+
             if (m_Grounded)
             {
-                m_nbJumps = 0;
+                 m_nbJumps = 0;
             }
-            if (m_WallCheck)
+            if (m_WallCheck && WallJumpb)
             {
                 m_Rigidbody2D.AddForce(new Vector2(0, m_JumpForce/80));
             }
@@ -163,6 +177,14 @@ namespace UnityStandardAssets._2D
             if(Life >= MaxLife)
             {
                 Life = MaxLife;
+            }
+        }
+
+        public void oui()
+        {
+            if (m_Grounded)
+            {
+                m_nbJumps = 0;
             }
         }
     }

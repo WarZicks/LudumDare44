@@ -1,13 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets._2D;
 
 public class TriggerEnd : MonoBehaviour
 {
+    GameObject Player;
+
     [Tooltip("Le premier est le canavs actif")]
     public GameObject[] CanvasZone;
 
     public GameObject[] Capacite;
+
+    enum spelll { None, Jump, DoubleJump, Wall }; //Will be used to keep track of what's selected
+    spelll currentSel; // Create a Selection object that will be used throughout script
+
+    private void Start()
+    {
+        Player = GameObject.FindGameObjectWithTag("Player");
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -26,6 +37,18 @@ public class TriggerEnd : MonoBehaviour
                 {
                     go.SetActive(true);
                 }
+            }
+            if(currentSel == spelll.Jump)
+            {
+                Player.GetComponent<PlatformerCharacter2D>().Jump = true;
+            }
+            if (currentSel == spelll.DoubleJump)
+            {
+                Player.GetComponent<PlatformerCharacter2D>().DoubleJump = true;
+            }
+            if (currentSel == spelll.Wall)
+            {
+                Player.GetComponent<PlatformerCharacter2D>().WallJumpb = true;
             }
         }
     }
