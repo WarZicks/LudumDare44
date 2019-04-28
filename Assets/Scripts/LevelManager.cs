@@ -22,6 +22,8 @@ public class LevelManager : MonoBehaviour
 
     public Transform LevelSelected, StartPosition;
     [SerializeField]public int CurrentLevel = 0;
+
+    public List<GameObject> Plateforme;
     
     // Start is called before the first frame update
     void Start()
@@ -49,5 +51,13 @@ public class LevelManager : MonoBehaviour
         FormerLevel = transform.GetChild(CurrentLevel - 1);
         LevelSelected.gameObject.SetActive(true);
         FormerLevel.gameObject.SetActive(false);
+    }
+
+    public void ResetNiv()
+    {
+        foreach(GameObject go in Plateforme)
+        {
+            Destroy(go);
+        }
     }
 }
