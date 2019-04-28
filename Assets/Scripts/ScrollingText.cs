@@ -21,10 +21,14 @@ public class ScrollingText : MonoBehaviour
     void Start()
     {
         StartPos = GetComponent<RectTransform>().position.y;
-        target += 200;
+        target += 250;
+        if(Scroll)
+        {
+            Wait = true;
+        }
         if (Wait)
         {
-            Invoke("ChangeReady", 5);
+            Invoke("ChangeReady", 3);
         }
         else
         {
@@ -38,10 +42,14 @@ public class ScrollingText : MonoBehaviour
         if (ready && Go)
         {
             t += Time.deltaTime / timeToReachTarget;
+            Debug.Log(t);
             if (Scroll)
             {
                 GetComponent<RectTransform>().position = new Vector3(GetComponent<RectTransform>().position.x, Mathf.Lerp(StartPos, target, t), GetComponent<RectTransform>().position.z);
-                StartCoroutine(FadeTo(1.0f, GetComponent<CanvasGroup>(), true));
+                if (t > 1)
+                {
+                    StartCoroutine(FadeTo(1.0f, GetComponent<CanvasGroup>(), true));
+                }
             }
             else
             {
@@ -56,7 +64,6 @@ public class ScrollingText : MonoBehaviour
     void ChangeReady()
     {
         ready = true;
-        Go = true;
     }
 
     IEnumerator FadeTo(float aTime, CanvasGroup a, bool In)
@@ -64,14 +71,16 @@ public class ScrollingText : MonoBehaviour
         if (In)
         {
             float alpha = a.alpha;
-            for (float t = 1f; t > 0f; t -= Time.deltaTime / aTime)
+            for (float x = 1f; x > 0f; x -= Time.deltaTime / aTime)
             {
-                a.alpha = t;
+                a.alpha = x;
                 yield return null;
             }
 
             t = 0;
             Go = false;
+            alpha = 0;
+
             if (Next != null)
             {
                 StartCoroutine(FadeTo(1.0f, Next.GetComponent<CanvasGroup>(), false));
