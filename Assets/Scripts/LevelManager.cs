@@ -20,8 +20,8 @@ public class LevelManager : MonoBehaviour
     }
     #endregion
 
-    private Transform LevelSelected, StartPosition;
-    [SerializeField]private int CurrentLevel = 0;
+    public Transform LevelSelected, StartPosition;
+    [SerializeField]public int CurrentLevel = 0;
     
     // Start is called before the first frame update
     void Start()

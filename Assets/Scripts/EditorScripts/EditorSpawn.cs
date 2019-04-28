@@ -85,6 +85,7 @@ public class EditorSpawn : MonoBehaviour
                         Clone = Instantiate(Piece[Index]);
                         Clone.GetComponent<PieceCollider>().Actif = true;
                         Clone.GetComponent<PieceCollider>().life = lifemoins;
+                        Clone.transform.parent = GameObject.FindGameObjectWithTag("LevelController").transform.GetChild(LevelManager.instance.CurrentLevel);
                     }
                 }
 
